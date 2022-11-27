@@ -1,0 +1,19 @@
+pip install opencv-python
+
+import numpy as np
+import pandas as pd
+
+from IPython.display import Image
+
+!git clone https://github.com/Mmodesti/OpenCV-Application.git
+
+face_cascade = cv2.CascadeClassifier('/content/OpenCV-Application/haarcascade_frontalface_default.xml')
+img = cv2.imread('/content/OpenCV-Application/test.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+
+for (x, y, w, h) in faces: 
+  cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+cv2.imwrite("face_detected.png", img) 
+print('Rostos detectados e salvos com sucesso')
+Image("face_detected.png", width=700, height=800)
